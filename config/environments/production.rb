@@ -36,8 +36,8 @@ Rails.application.configure do
 
   # Mount Action Cable outside main process or domain
   config.action_cable.mount_path = '/cable'
-  config.action_cable.url = 'wss://git.heroku.com/pacific-lowlands-87176.git/cable'
-  config.action_cable.allowed_request_origins = [ 'http://git.heroku.com/pacific-lowlands-87176.git', 'https://git.heroku.com/pacific-lowlands-87176.git' ]
+  config.action_cable.url = 'wss://pacific-lowlands-87176.herokuapp.com/cable'
+  config.action_cable.allowed_request_origins = [ 'http://pacific-lowlands-87176.herokuapp.com', 'https://pacific-lowlands-87176.herokuapp.com' ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
