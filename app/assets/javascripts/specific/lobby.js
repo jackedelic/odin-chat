@@ -200,7 +200,9 @@ $(document).ready(function(){
 	}            
 
 	//-- No use time. It is a javaScript effect.
-	function insertChat(who, text, time = 0, previous = false){
+	function insertChat(who,text,time,previous){
+		time = null ? 0 : time;
+		previous = null ? false : previous;
 	    var control = "";
 	    var date;
 	    if(previous==false){
@@ -232,9 +234,9 @@ $(document).ready(function(){
 	        function(){                        
 	            $("#chat-screen").append(control);
 
+			    // scrollToBottom for chatWindow
 			    chatWindow.scrollToBottom();
 	        }, time);
-	    // scrollToBottom for chatWindow
 	    
 	}
 
