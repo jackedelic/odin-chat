@@ -1,0 +1,38 @@
+header{
+	h1{
+		text-align: center;
+	}
+}
+
+section#sign_up_form{
+	div.translucent-form-overlay{
+		
+		width: 100%;
+		background-color: rgba(54, 54, 54, 0.8);
+		padding: 20px;
+		color: white;
+
+		
+		input[type=submit]{
+			&:hover{
+				cursor: pointer;
+			}
+		}
+	}
+}
+section#sign_in_form{
+	div.translucent-form-overlay{
+		
+		width: 100%;
+		background-color: rgba(54, 54, 54, 0.8);
+		padding: 20px;
+		color: white;
+
+		
+		input[type=submit]{
+			&:hover{
+				cursor: pointer;
+			}
+		}
+	}
+}

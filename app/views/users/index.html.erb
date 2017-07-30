@@ -1,0 +1,60 @@
+<% content_for(:page_specific) do %>
+	<%= stylesheet_link_tag("/assets/users_index") %>
+
+<% end %>
+
+<header class="container">
+	<div class="row">
+		<div class="col align-self-center">
+			<h1>Welcome to Odin Chat</h1>
+		</div>
+	</div>
+</header>
+
+<section id="sign_in_form" class="container">
+	<div class="row">
+		<div class="col-md-4 translucent-form-overlay">
+			<!-- sign in -->
+			<%= form_for(:user, url:{controller: :sessions, action: :create}) do |f| %>
+				<h3>Sign In</h3>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Name</label> <%= f.text_field(:name, class: "form-control", placeholder: "name") %>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Password</label> <%= f.text_field(:password, class: "form-control", placeholder: "password") %>
+				</div>
+				<%= f.submit("sign in", class: "btn btn-primary") %>
+			<% end %>
+		</div>
+		
+	</div>
+</section>
+<br>
+<section id="sign_up_form" class="container">
+	<div class="row">
+		<div class="col-md-4 translucent-form-overlay">
+			<!-- sign up -->
+			<%= form_for(:user, url: {controller: :users, action: :create}) do |f| %>
+				<h3>Sign Up</h3>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Name</label> <%= f.text_field(:name, class: "form-control", placeholder: "name") %>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Password</label> <%= f.text_field(:password, class: "form-control", placeholder: "password") %>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Password confirmation</label> <%= f.text_field(:password, class: "form-control", placeholder: "confirm password") %>
+				</div>
+				<%= f.submit("sign up", class: "btn btn-primary") %>
+			
+			<% end %>
+		</div>
+	</div>
+	
+</section>
+
+
+
+
+
+

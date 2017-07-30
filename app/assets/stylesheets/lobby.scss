@@ -1,0 +1,222 @@
+// 1. Global
+// ---------
+
+$global-font-size: 100%;
+$global-width: rem-calc(1200);
+$global-lineheight: 1.5;
+$foundation-palette: (
+  primary: #1779ba,
+  secondary: #767676,
+  success: #3adb76,
+  warning: #ffae00,
+  alert: #cc4b37,
+);
+$light-gray: #e6e6e6;
+$medium-gray: #cacaca;
+$dark-gray: #8a8a8a;
+$black: #0a0a0a;
+$white: #fefefe;
+$body-background: $white;
+$body-font-color: $black;
+$body-font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+$body-antialiased: true;
+$global-margin: 1rem;
+$global-padding: 1rem;
+$global-position: 1rem;
+$global-weight-normal: normal;
+$global-weight-bold: bold;
+$global-radius: 0;
+$global-menu-padding: 0.7rem 1rem;
+$global-menu-nested-margin: 1rem;
+$global-text-direction: ltr;
+$global-flexbox: true;
+$global-prototype-breakpoints: false;
+$global-color-pick-contrast-tolerance: 0;
+$print-transparent-backgrounds: true;
+
+/*// This code overwrites any variables set in the Foundation settings scss file*/
+$body-font-family: "Avenir Roman", "Helvetica", Helvetica, Arial, sans-serif;
+
+$body-bg: #fff !default;
+$body-font-color: #323B46 !default;
+$heading-font-color: #0094BA !default;
+
+$primary-color: #C6CD00 !default;
+$secondary-color: #252F37 !default;
+$alert-color: #c60f13 !default;
+$success-color: #5da423 !default;
+
+$global-radius: 3px !default;
+            
+/*end of foundation default*/
+
+$card-user-container-margin-bottom: 1rem;
+$card-user-container-radius: $global-radius;
+$card-user-container-background: $white;
+$card-user-container-color: $black;
+$card-user-container-image-size: 10rem;
+
+.card-user-container {
+  border: 1px black solid;
+  margin-bottom: $card-user-container-margin-bottom;
+  background-color: $card-user-container-background;
+  color: $black;
+  overflow: hidden;
+  padding: 0;
+  padding-top: 1em;
+  border-radius: $card-user-container-radius;
+
+  .card-user-avatar {
+    .user-image {
+      display: block;
+      margin: auto;
+      border-radius: 50%;
+      width: $card-user-container-image-size;
+      height: $card-user-container-image-size;
+      padding: rem-calc(15);
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .card-user-bio {
+    padding: 1rem;
+    text-align: center;
+
+    .location {
+      display: inline-block;
+      margin: 0 rem-calc(15);
+      color: $secondary-color;
+      font-size: rem-calc(14);
+    }
+
+    .location-icon,
+    .location-text {
+      display: inline-block;
+      padding: 0 rem-calc(5);
+    }
+  }
+
+  .card-user-social {
+    background: $light-gray;
+    padding: 1rem;
+    text-align: center;
+
+    ul {
+      display: inline-block;
+
+      li {
+        margin: 0 10px;
+        font-size: 1.2em;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+
+  .card-user-button {
+    text-align: center;
+    padding: 0;
+  }
+}
+
+
+/*people side bar*/
+
+#people{
+  overflow-y: scroll;
+  height: 500px;
+}
+
+/*chat-screen*/
+
+.mytext{
+    border:0;padding:10px;background:whitesmoke;
+}
+.text{
+    width:100%;display:flex;flex-direction:column;
+    padding-bottom: 6px;
+}
+.text > p:first-of-type{
+    width:100%;margin-top:5px;margin-bottom:5px;line-height: 20px;font-size: 18px;
+    display: block;
+    max-width: 100%;
+}
+.text > p:last-of-type{
+    width:100%;text-align:right;color:silver;margin-bottom:-7px;margin-top:auto;
+}
+.text-l{
+    float:left;padding-right:10px;
+}        
+.text-r{
+    float:right;padding-left:10px;
+}
+
+.macro{
+    margin-top:5px;width:70%;border-radius:5px;padding:5px;display:flex;
+}
+.msj-rta{
+    float:right;background:#e6ffe6;
+}
+.msj{
+    float:left;background:#e6ffff;
+}
+.frame{
+    background:white;
+    height:400px;
+    overflow-y:scroll;
+    padding:0;
+}
+.frame > div:last-of-type{
+    position:absolute;bottom:5px;width:100%;
+}
+ul#chat-screen {
+    display: block;
+    width:90%;
+    list-style-type: none;
+    padding:0;
+    position:absolute;
+
+}
+.msj:before{
+    width: 0;
+    height: 0;
+    content:"";
+    top:-5px;
+    left:-14px;
+    position:relative;
+    border-style: solid;
+    border-width: 0 13px 13px 0;
+    border-color: transparent #ffffff transparent transparent;            
+}
+.msj-rta:after{
+    width: 0;
+    height: 0;
+    content:"";
+    top:-5px;
+    left:14px;
+    position:relative;
+    border-style: solid;
+    border-width: 13px 13px 0 0;
+    border-color: whitesmoke transparent transparent transparent;           
+}  
+input:focus{
+    outline: none;
+}        
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #d4d4d4;
+}
+::-moz-placeholder { /* Firefox 19+ */
+    color: #d4d4d4;
+}
+:-ms-input-placeholder { /* IE 10+ */
+    color: #d4d4d4;
+}
+:-moz-placeholder { /* Firefox 18- */
+    color: #d4d4d4;
+}     

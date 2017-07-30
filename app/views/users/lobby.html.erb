@@ -1,0 +1,59 @@
+
+<% content_for :page_specific do %>
+	<%= javascript_include_tag 'specific/lobby' %>
+	<%= javascript_include_tag 'channels/room' %>
+	<%= stylesheet_link_tag 'lobby'%>
+<% end %>	
+
+<section class="main container">
+	<div class="row">
+		<div class="col-md-3">
+			<div id="people">
+				
+			</div>
+		</div>
+		<div class="col-md-9">
+			<div id="chat-window">
+				
+			</div>
+		</div>
+	</div>
+</section>
+
+<script type="text/template" id="card-user-template">
+	{{ _.each(users,function(user){ }}
+
+	<div class="card-user-container">
+	
+
+	  <!--user info name, bio and location-->
+	  <div class="card-user-bio">
+	    <h4 data-user-id="{{= user.attributes.id }}">{{=user.attributes.name}}</h4>
+	  </div>
+
+	  <!--card's follow button-->
+	  <div class="card-user-button">
+	    <a href="#" class="hollow button" data-person="{{= user.attributes.id }}" >Chat</a>
+	  </div>
+	</div>
+	{{ }); }}
+</script>
+
+<!-- template for chatting window -->
+<script type="text/template" id="chat-window-template">
+	<div class="col-md-12 frame">
+        <ul id="chat-screen"></ul>
+    </div> 
+	
+	<form>
+		<div class="form-group">
+		    <label for="exampleTextarea">Currently chatting with {{= partner.attributes.name}}</label>
+		    <textarea class="form-control" id="userInput" rows="3"></textarea>
+		 </div>
+	</form>
+	
+</script>
+
+<!-- pass data from controller to lobby.js -->
+<div id="users" data-value="<%= @users.all.to_json %>"></div>
+<div id="current-user" data-value="<%= @user.to_json %>"></div>
