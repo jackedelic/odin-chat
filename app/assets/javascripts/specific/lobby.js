@@ -50,7 +50,7 @@ $(document).ready(function(){
 		template: _.template($('#chat-window-template').html()),
 		render: function(){
 			var tem = {partner: currentUser.partner,current_user: currentUser};
-			this.$el.html(this.template({datum: tem}));
+			this.$el.html(this.template({data: tem}));
 		},
 		send: function(e){
 			if(e.which == 13){
