@@ -33,6 +33,7 @@ gem 'bcrypt', '~> 3.1.7', git: 'https://github.com/codahale/bcrypt-ruby.git'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'redis'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
