@@ -49,7 +49,7 @@ $(document).ready(function(){
 		},
 		template: _.template($('#chat-window-template').html()),
 		render: function(){
-			this.$el.html(this.template({data:{partner:currentUser.partner,current_user:currentUser}}));
+			this.$el.html(this.template({"data": {partner: currentUser.partner,current_user: currentUser}}));
 		},
 		send: function(e){
 			if(e.which == 13){
