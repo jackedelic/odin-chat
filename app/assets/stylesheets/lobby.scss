@@ -65,6 +65,7 @@ $card-user-container-image-size: 10rem;
   padding: 0;
   padding-top: 1em;
   border-radius: $card-user-container-radius;
+  position: relative;
 
   .card-user-avatar {
     .user-image {
@@ -168,7 +169,7 @@ $card-user-container-image-size: 10rem;
 }
 .frame{
     background:white;
-    height:400px;
+    height:440px;
     overflow-y:scroll;
     padding:0;
 }

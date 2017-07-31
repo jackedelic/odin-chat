@@ -9,6 +9,9 @@ var cardUser;
 // chat window
 var ChatWindow;
 var chatWindow;
+// search people bar
+var SearchPeopleBar;
+var searchPeopleBar;
 
 // ---------------MODEL---------------
 var user;
@@ -46,7 +49,7 @@ $(document).ready(function(){
 		},
 		template: _.template($('#chat-window-template').html()),
 		render: function(){
-			this.$el.html(this.template({partner:currentUser.partner}));
+			this.$el.html(this.template({data:{partner:currentUser.partner,current_user:currentUser}}));
 		},
 		send: function(e){
 			if(e.which == 13){
@@ -75,6 +78,28 @@ $(document).ready(function(){
 	});
 	chatWindow = new ChatWindow();
 
+
+	SearchPeopleBar = Backbone.View.extend({
+		el:'#search-people',
+		events:{
+			'keyup #search-people-input':'scrollToPeople'
+		},
+		scrollToPeople: function(e){
+			_.each($('.card-user-bio h4'),function(item){
+				if($('#search-people-input').val() != ""){
+					if($(item).text().match(new RegExp("^"+ $('#search-people-input').val() + ".*"))){
+						console.log("matched found" + $(item).text());
+						$('#people')[0].scrollTop = $(item).parent().parent().position().top;
+					}
+					
+				}
+				
+			})
+		}
+
+	});
+
+	searchPeopleBar = new SearchPeopleBar();
 // ---------------MODEL---------------
 	User = Backbone.Model.extend({
 
@@ -102,7 +127,8 @@ $(document).ready(function(){
 	// button
 	var blinking = {};
 	$('.button').on('click',function(e){
-
+		// clear search-people-input
+		$('#search-people-input').val("");
 		e.preventDefault();
 		// get the user from the collection using id
 		currentUser.partner = users.get(parseInt($(e.currentTarget).data('person')));

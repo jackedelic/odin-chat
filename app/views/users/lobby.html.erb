@@ -4,11 +4,23 @@
 	<%= javascript_include_tag 'channels/room' %>
 	<%= stylesheet_link_tag 'lobby'%>
 <% end %>	
+<header class="container">
+	<div class="row">
+		<div col-md-12>
+			<br>
+		</div>
+	</div>
+</header>
 
 <section class="main container">
 	<div class="row">
-		<div class="col-md-3">
-			<div id="people">
+		<div class="col-md-3 left-side">
+			<div class="col-md-12 inner-left-side" id="search-people">
+				<div class="form-group">
+				    <input type="text" class="form-control" id="search-people-input"  placeholder="Search people">
+				 </div>
+			</div>
+			<div class="col-md-12 inner-left-side" id="people">
 				
 			</div>
 		</div>
@@ -47,7 +59,7 @@
 	
 	<form>
 		<div class="form-group">
-		    <label for="exampleTextarea">Currently chatting with {{= partner.attributes.name}}</label>
+		    <label for="exampleTextarea">Logged in as {{= data.current_user.attributes.name }}. Currently chatting with {{= data.partner.attributes.name}}.</label>
 		    <textarea class="form-control" id="userInput" rows="3"></textarea>
 		 </div>
 	</form>
@@ -55,5 +67,5 @@
 </script>
 
 <!-- pass data from controller to lobby.js -->
-<div id="users" data-value="<%= @users.all.to_json %>"></div>
+<div id="users" data-value="<%= @users.to_json %>"></div>
 <div id="current-user" data-value="<%= @user.to_json %>"></div>

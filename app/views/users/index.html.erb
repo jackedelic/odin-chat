@@ -6,7 +6,11 @@
 <header class="container">
 	<div class="row">
 		<div class="col align-self-center">
-			<h1>Welcome to Odin Chat</h1>
+			<% unless flash.empty? %>
+				<div class="alert alert-danger" role="alert">
+				  <strong>Oh snap!</strong> <%= flash[:error] %>
+				</div>
+		    <% end %>
 		</div>
 	</div>
 </header>
@@ -25,6 +29,16 @@
 				</div>
 				<%= f.submit("sign in", class: "btn btn-primary") %>
 			<% end %>
+		</div>
+		<div class="col-md-8">
+			<div class="container_for_animation">
+			  <% if flash.empty? %>
+				  <h1>Welcome to Odin Chat</h1>
+			<% else %>
+				  <h1>Error!</h1>
+				</div>
+		    <% end %>
+			</div>			
 		</div>
 		
 	</div>
@@ -49,9 +63,12 @@
 			
 			<% end %>
 		</div>
+
+
 	</div>
 	
 </section>
+
 
 
 
