@@ -120,7 +120,24 @@ $(document).ready(function(){
 
 
 
+// Global subsciption 
+	if((App.cable.subscriptions.subscriptions.find(function(e){return JSON.parse(e.identifier).group_id == "global" }))==undefined) {
+		App.cable.subscriptions.create({channel: "RoomChannel", group_id: "global"},{
+			connected: function(){
 
+			},
+			disconnected: function(){
+
+			},
+			received: function(data){
+				console.log(data.user_id + " is online");
+				var labelName = $('h4[data-user-id="'+data.user_id+'"]');
+				labelName.next().text("online");
+				labelName.next().css("color","#69d92e");
+			}
+		});
+
+	}
 
 
 
@@ -160,46 +177,52 @@ $(document).ready(function(){
 				// End blinking
 				if(blinking[(resp.id || resp[0].group_id)]){
 					clearInterval(blinking[(resp.id || resp[0].group_id)]);
-					console.log("cleared interval");
+					console.log(JSON.stringify(blinking)+"cleared interval. resp: " + (resp.id || resp[0].group_id));
+					blinking[(resp.id || resp[0].group_id)] = null;
+					console.log("partner for this grp:"+partnerForThisGroup);
 					$('h4[data-user-id="'+partnerForThisGroup.attributes.id+'"]').css({
 						"color":"inherit"
 					});
 					
 				}
-				// create websocket connection 
-				App.room = App.cable.subscriptions.create({channel: "RoomChannel",group_id: (resp.id || resp[0].group_id)},{
-				  connected: function(){
-				    // # Called when the subscription is ready for use on the server
-				  	console.log("connected from group " + (resp.id || resp[0].group_id))
-				  },
+				// create websocket connection if it does not already exists
+				if((App.cable.subscriptions.subscriptions.find(function(e){return JSON.parse(e.identifier).group_id == (resp.id ||resp[0].group_id) }))==undefined) {
+					App.room = App.cable.subscriptions.create({channel: "RoomChannel",group_id: (resp.id || resp[0].group_id)},{
+					  connected: function(){
+					    // # Called when the subscription is ready for use on the server
+					  	console.log("connected from group " + (resp.id || resp[0].group_id))
+					  },
 
-				  disconnected: function(){
-				    // # Called when the subscription has been terminated by the server
-				  	console.log("disconnected from group " + (resp.id || resp[0].group_id))
-				  },
+					  disconnected: function(){
+					    // # Called when the subscription has been terminated by the server
+					  	console.log("disconnected from group " + (resp.id || resp[0].group_id))
+					  },
 
-				  received: function(message){
-				    // # Called when there's incoming data on the websocket for this channel
-				  	if(message.user_id !== currentUser.attributes.id && currentUser.partner.attributes.id == message.user_id){ 
-						insertChat("partner",message.content);
-					}
+					  received: function(message){
+					    // # Called when there's incoming data on the websocket for this channel
+					    console.log('received'+message);
+					  	if((message.user_id !== currentUser.attributes.id) && (currentUser.partner.attributes.id == message.user_id)){ 
+							insertChat("partner",message.content);
+						}
 
-					// notify if not chatting with this partner
-					if(currentUser.partner.attributes.id !== partnerForThisGroup.attributes.id){
-						console.log("notification from partner " + partnerForThisGroup.attributes.name )
-						blinking[(resp.id || resp[0].group_id)] = setInterval(function(){
-							var labelName = $('h4[data-user-id="'+partnerForThisGroup.attributes.id+'"]');
-							if(labelName.css("color")=="rgb(255, 0, 0)"){
-								labelName.css("color","inherit");
-							}else{
-								labelName.css("color","rgb(255, 0, 0)");
-							}
-							
-						},300);
-						
-					}
-				  }
-				});
+						// notify if not chatting with this partner
+						if(currentUser.partner.attributes.id !== partnerForThisGroup.attributes.id){
+							console.log("notification from partner " + partnerForThisGroup.attributes.name )
+							blinking[(resp.id || resp[0].group_id)] = setInterval(function(){
+								var labelName = $('h4[data-user-id="'+partnerForThisGroup.attributes.id+'"]');
+								if(labelName.css("color")=="rgb(255, 0, 0)"){
+									labelName.css("color","inherit");
+								}else{
+									labelName.css("color","rgb(255, 0, 0)");	
+								}
+								
+							},300);
+							console.log("blinking hash added: " + JSON.stringify(blinking));
+						}
+					  }
+					});
+
+				}
 				
 
 

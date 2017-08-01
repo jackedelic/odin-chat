@@ -4,6 +4,10 @@ class SessionsController < ApplicationController
 		@user = User.find_by_name(params[:user][:name])
 		if @user && @user.authenticate(params[:user][:password])
 			session[:user_id] = @user.id
+
+			# global broadcast: tell the world this user is online
+			ActionCable.server.broadcast("room_channel_global",user_id: @user.id)
+
 			redirect_to "/users/lobby"
 		else
 			flash[:error] = "Error signing in."

@@ -8,6 +8,8 @@ class UsersController < ApplicationController
 	def lobby
 		@users = User.all.reject{|u| u.id == current_user.id}
 		@user = current_user
+		# global broadcast: tell the world this user is online
+		ActionCable.server.broadcast("room_channel_global",user_id: @user.id)
 	end
 
 	def create

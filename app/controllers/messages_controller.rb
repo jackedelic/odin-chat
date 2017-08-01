@@ -1,5 +1,8 @@
 class MessagesController < ApplicationController
 	def all_messages_in_particular_group
+		# tell the world the user is online
+		ActionCable.server.broadcast("room_channel_global",user_id: current_user.id)
+
 		@partner_id = params[:partner_id].to_i
 		@partner = User.find_by_id(@partner_id)
 		# create new group if such group does not exist previously, else just use the existing group
@@ -27,6 +30,9 @@ class MessagesController < ApplicationController
 	end
 
 	def create
+		# tell the world the user is online
+		ActionCable.server.broadcast("room_channel_global",user_id: current_user.id)
+
 		# create new message
 		@message = Message.new(content: params[:message])
 
