@@ -144,7 +144,7 @@ $(document).ready(function(){
 	}
 
 
-	//s so that new onliner gets updated of who is online
+	// so that new onliner gets updated of who is online
 	
 	$.ajax({
 		type:'get',
