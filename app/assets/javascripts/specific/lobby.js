@@ -121,7 +121,9 @@ $(document).ready(function(){
 
 
 // Global subsciption 
+
 	if((App.cable.subscriptions.subscriptions.find(function(e){return JSON.parse(e.identifier).group_id == "global" }))==undefined) {
+
 		App.cable.subscriptions.create({channel: "RoomChannel", group_id: "global"},{
 			connected: function(){
 
@@ -134,10 +136,24 @@ $(document).ready(function(){
 				var labelName = $('h4[data-user-id="'+data.user_id+'"]');
 				labelName.next().text("online");
 				labelName.next().css("color","#69d92e");
+
+				
 			}
 		});
 
 	}
+
+
+	//s so that new onliner gets updated of who is online
+	
+	$.ajax({
+		type:'get',
+		url:'/broadcast',
+		complete: function(){
+			console.log("get request to sessions#broadcast_from_client");
+		}
+	})
+
 
 
 
@@ -208,6 +224,9 @@ $(document).ready(function(){
 						// notify if not chatting with this partner
 						if(currentUser.partner.attributes.id !== partnerForThisGroup.attributes.id){
 							console.log("notification from partner " + partnerForThisGroup.attributes.name )
+							// insert odinbot chat
+							insertChat("bot","There is a message from "+partnerForThisGroup.attributes.name);
+
 							blinking[(resp.id || resp[0].group_id)] = setInterval(function(){
 								var labelName = $('h4[data-user-id="'+partnerForThisGroup.attributes.id+'"]');
 								if(labelName.css("color")=="rgb(255, 0, 0)"){
@@ -271,6 +290,15 @@ $(document).ready(function(){
 	                            '</div>' +
 	                        '</div>' +
 	                    '</li>';                    
+	    }else if(who == "bot"){
+			control = '<li style="width:100%">' +
+	                        '<div class="msj-rta macro msj-bot">' +
+	                            '<div class="text text-r">' +
+	                                '<p style="color:#8a4504;">'+ "<span style='color:#8a4504;'>OdinBot: </span>" + text +'</p>' +
+	                                '<p><small>'+date+'</small></p>' +
+	                            '</div>' +
+	                        '</div>' +
+	                    '</li>';     
 	    }else{
 	        control = '<li style="width:100%;">' +
 	                        '<div class="msj-rta macro">' +

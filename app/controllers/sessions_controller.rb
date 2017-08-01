@@ -20,4 +20,11 @@ class SessionsController < ApplicationController
 		session[:user_id] = nil
 		redirect_to "/users/index"
 	end
+
+	def broadcast_from_client
+		# global broadcast: tell the world this user is online
+		ActionCable.server.broadcast("room_channel_global",user_id: current_user.id)
+
+		render json: nil
+	end
 end

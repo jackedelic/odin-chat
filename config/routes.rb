@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   # sessions controller
   post '/signin' => 'sessions#create'
   post '/signout' => 'sessions#destroy'
+  get '/broadcast' => 'sessions#broadcast_from_client'
 
 
   # ActionCable
