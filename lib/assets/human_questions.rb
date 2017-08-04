@@ -3,10 +3,10 @@
 		"who are you","who r you","who r u","tell me about yourself","who r u"
 	],
 	"hi":[
-		"hi(\s)*|!*","hello","^\s*yo(|!+|\s)"
+		"hi[^a-z]","[^a-z]hello[^a-z]","^\s*yo[^a-z]"
 	],
 	"ok":[
-		"ok","alright","orite","okay","okie"
+		"[^a-z]ok[^a-z]","alright","orite","[^a-z]ok(ay)|(ie)[^a-z]"
 	],
 	"thanks":[
 		"thanks","thank (you)|(u)"
