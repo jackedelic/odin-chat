@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # messages controller
   post '/messages' => 'messages#create'
   get '/messages/all_messages_in_particular_group' => 'messages#all_messages_in_particular_group'
-
+  post '/messages/bot_reply' => 'messages#bot_reply'
 
   # sessions controller
   post '/signin' => 'sessions#create'

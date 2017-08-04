@@ -21,9 +21,28 @@
 				 </div>
 			</div>
 			<div class="col-md-12 inner-left-side" id="people">
-				
+				<!-- card for odinbot -->
+				<div class="card-user-container">
+					<div class="card-user-bio">
+				    	<h4 id="bot-label-name">Odin Bot</h4>
+				    	<small id="bot-small">online</small>
+					</div>
+
+				  <!--card's follow button-->
+				 	<div class="card-user-button">
+						<button type="button" class="bot-btn btn btn-primary">Chat</button>
+					</div>
+				</div>
+
+				<!-- cards for other users -->
+
+
 			</div>
+
+
+
 		</div>
+
 		<div class="col-md-9">
 			<div id="chat-window">
 				
@@ -46,7 +65,7 @@
 
 	  <!--card's follow button-->
 	  <div class="card-user-button">
-	    <a href="#" class="hollow button" data-person="{{= user.attributes.id }}" >Chat</a>
+		  <button type="button" class="user-btn btn btn-primary" data-person="{{= user.attributes.id }}">Chat</button>
 	  </div>
 	</div>
 	{{ }); }}

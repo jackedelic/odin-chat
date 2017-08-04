@@ -223,3 +223,12 @@ input:focus{
 :-moz-placeholder { /* Firefox 18- */
     color: #d4d4d4;
 }     
+.btn{
+  margin-bottom: 1.1em;
+  &:hover{
+    cursor:pointer;
+  }
+}
+small#bot-small{
+  color: #69d92e
+}

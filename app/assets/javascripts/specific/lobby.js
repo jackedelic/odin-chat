@@ -53,23 +53,47 @@ $(document).ready(function(){
 			this.$el.html(this.template({data: tem}));
 		},
 		send: function(e){
-			if(e.which == 13){
-				console.log('enter is pressed');
-				var inputMessage = $(e.currentTarget).val()
-				insertChat("me",inputMessage);
-				$(e.currentTarget).val("");
-				$.ajax({
-					type: 'POST',
-					url: '/messages',
-					data:{
-						message: inputMessage,
-						partner_id: currentUser.partner.attributes.id 
-					},
-					success:function(){
-						console.log("successfully send the message");
-					}
+			// if chatting with bot, route to different action
+			if(currentUser.partner.attributes.name == "OdinBot"){
+				if(e.which == 13){
+					console.log("enter is pressed,chatting with bot");
+					var inputMessage = $(e.currentTarget).val()
+					insertChat("me",inputMessage);
+					$(e.currentTarget).val("");
 
-				})
+					$(e.currentTarget).val("");
+					$.ajax({
+						type: 'POST',
+						url: '/messages/bot_reply',
+						data:{
+							message: inputMessage
+						},
+						success:function(){
+							console.log("successfully send the message to messages#bot_reply");
+						}
+
+					})
+				}
+			}else{
+				if(e.which == 13){
+					console.log('enter is pressed');
+					var inputMessage = $(e.currentTarget).val()
+					insertChat("me",inputMessage);
+					$(e.currentTarget).val("");
+					$.ajax({
+						type: 'POST',
+						url: '/messages',
+						data:{
+							message: inputMessage,
+							partner_id: currentUser.partner.attributes.id 
+						},
+						success:function(){
+							console.log("successfully send the message");
+						}
+
+					})
+				}
+				
 			}
 		},
 		scrollToBottom: function(){
@@ -160,7 +184,8 @@ $(document).ready(function(){
 	// ---------------misc---------------------~~~~~~~~~~~spaghetti code zone~~~~~~~~~
 	// button
 	var blinking = {};
-	$('.button').on('click',function(e){
+	// clicked on chat with user button
+	$('.user-btn').on('click',function(e){
 		// clear search-people-input
 		$('#search-people-input').val("");
 		e.preventDefault();
@@ -249,6 +274,78 @@ $(document).ready(function(){
 
 			}
 		})
+	});
+
+
+	// clicked on chat with odin bot button
+	$('.bot-btn').on('click',function(e){
+		// clear search-people-input
+		$('#search-people-input').val("");
+		// get the user from the collection using id
+		currentUser.partner = new User({name:"OdinBot"});
+		var partnerForThisGroup = currentUser.partner;
+
+		chatWindow.render();
+		console.log("clicked to bot");
+
+		// End blinking
+		if(blinking["bot_human_" + currentUser.attributes.id]){
+			clearInterval(blinking["bot_human_" + currentUser.attributes.id]);
+			console.log(JSON.stringify(blinking)+"cleared interval. " + "bot_human_" + currentUser.attributes.id);
+			blinking["bot_human_" + currentUser.attributes.id] = null;
+			console.log("partner for this grp:"+partnerForThisGroup);
+			$('#bot-label-name').css({
+				"color":"inherit"
+			});
+			
+		}
+
+		if((App.cable.subscriptions.subscriptions.find(function(e){return JSON.parse(e.identifier).bot_human_id == currentUser.attributes.id }))==undefined) {
+				console.log("subscription created for bot_human_");
+					App.room = App.cable.subscriptions.create({channel: "RoomChannel",bot_human_id: currentUser.attributes.id},{
+					  connected: function(){
+					    // # Called when the subscription is ready for use on the server
+					  	console.log("connected from bot-human group " + currentUser.attributes.id);
+					  },
+
+					  disconnected: function(){
+					    // # Called when the subscription has been terminated by the server
+					  	console.log("disconnected bot-human from group " + currentUser.attributes.id);
+					  },
+
+					  received: function(message){
+					    // # Called when there's incoming data on the websocket for this channel
+					    console.log('received'+message);
+						
+						// delay for random period of time to simulate human response time
+						setTimeout(function(){
+							insertChat("partner(bot)",message.content);
+
+						},Math.random()*4*1000);
+						
+
+						// notify if not chatting with this partner
+						if(currentUser.partner.attributes.name !== partnerForThisGroup.attributes.name){
+							console.log("notification from partner " + partnerForThisGroup.attributes.name )
+							// insert odinbot chat
+							insertChat("bot","There is a message from "+partnerForThisGroup.attributes.name);
+
+							blinking["bot_human_" + currentUser.attributes.id] = setInterval(function(){
+								var labelName = $('#bot-label-name');
+								if(labelName.css("color")=="rgb(255, 0, 0)"){
+									labelName.css("color","inherit");
+								}else{
+									labelName.css("color","rgb(255, 0, 0)");	
+								}
+								
+							},300);
+							console.log("blinking hash added: " + JSON.stringify(blinking));
+						}
+					  }
+					});
+
+				}
+
 	});
 
 
