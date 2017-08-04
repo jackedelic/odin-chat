@@ -1,0 +1,244 @@
+/*// This code overwrites any variables set in the Foundation settings scss file*/
+/*end of foundation default*/
+/* line 60, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.card-user-container {
+  border: 1px black solid;
+  margin-bottom: 1rem;
+  background-color: #fefefe;
+  color: #0a0a0a;
+  overflow: hidden;
+  padding: 0;
+  padding-top: 1em;
+  border-radius: 0;
+  position: relative;
+}
+/* line 72, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.card-user-container .card-user-avatar .user-image {
+  display: block;
+  margin: auto;
+  border-radius: 50%;
+  width: 10rem;
+  height: 10rem;
+  padding: rem-calc(15);
+}
+/* line 80, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.card-user-container .card-user-avatar .user-image:hover {
+  transform: scale(1.1);
+}
+/* line 86, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.card-user-container .card-user-bio {
+  padding: 1rem;
+  text-align: center;
+}
+/* line 90, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.card-user-container .card-user-bio .location {
+  display: inline-block;
+  margin: 0 rem-calc(15);
+  color: #252F37;
+  font-size: rem-calc(14);
+}
+/* line 97, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.card-user-container .card-user-bio .location-icon,
+.card-user-container .card-user-bio .location-text {
+  display: inline-block;
+  padding: 0 rem-calc(5);
+}
+/* line 104, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.card-user-container .card-user-social {
+  background: #e6e6e6;
+  padding: 1rem;
+  text-align: center;
+}
+/* line 109, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.card-user-container .card-user-social ul {
+  display: inline-block;
+}
+/* line 112, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.card-user-container .card-user-social ul li {
+  margin: 0 10px;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+/* line 117, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.card-user-container .card-user-social ul li:hover {
+  transform: scale(1.1);
+}
+/* line 124, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.card-user-container .card-user-button {
+  text-align: center;
+  padding: 0;
+}
+
+/*people side bar*/
+/* line 133, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+#people {
+  overflow-y: scroll;
+  height: 500px;
+}
+
+/*chat-screen*/
+/* line 140, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.mytext {
+  border: 0;
+  padding: 10px;
+  background: whitesmoke;
+}
+
+/* line 143, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.text {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 6px;
+}
+
+/* line 147, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.text > p:first-of-type {
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  line-height: 20px;
+  font-size: 18px;
+  display: block;
+  max-width: 100%;
+}
+
+/* line 152, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.text > p:last-of-type {
+  width: 100%;
+  text-align: right;
+  color: silver;
+  margin-bottom: -7px;
+  margin-top: auto;
+}
+
+/* line 155, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.text-l {
+  float: left;
+  padding-right: 10px;
+}
+
+/* line 158, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.text-r {
+  float: right;
+  padding-left: 10px;
+}
+
+/* line 162, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.macro {
+  margin-top: 5px;
+  width: 70%;
+  border-radius: 5px;
+  padding: 5px;
+  display: flex;
+}
+
+/* line 165, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.msj-rta {
+  float: right;
+  background: #e6ffe6;
+}
+
+/* line 168, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.msj {
+  float: left;
+  background: #e6ffff;
+}
+
+/* line 171, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.msj-bot {
+  background: #fcd8b6;
+}
+
+/* line 172, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.frame {
+  background: white;
+  height: 440px;
+  overflow-y: scroll;
+  padding: 0;
+}
+
+/* line 178, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.frame > div:last-of-type {
+  position: absolute;
+  bottom: 5px;
+  width: 100%;
+}
+
+/* line 181, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+ul#chat-screen {
+  display: block;
+  width: 90%;
+  list-style-type: none;
+  padding: 0;
+  position: absolute;
+}
+
+/* line 189, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.msj:before {
+  width: 0;
+  height: 0;
+  content: "";
+  top: -5px;
+  left: -14px;
+  position: relative;
+  border-style: solid;
+  border-width: 0 13px 13px 0;
+  border-color: transparent #ffffff transparent transparent;
+}
+
+/* line 200, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.msj-rta:after {
+  width: 0;
+  height: 0;
+  content: "";
+  top: -5px;
+  left: 14px;
+  position: relative;
+  border-style: solid;
+  border-width: 13px 13px 0 0;
+  border-color: whitesmoke transparent transparent transparent;
+}
+
+/* line 211, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+input:focus {
+  outline: none;
+}
+
+/* line 214, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #d4d4d4;
+}
+
+/* line 217, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #d4d4d4;
+}
+
+/* line 220, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #d4d4d4;
+}
+
+/* line 223, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #d4d4d4;
+}
+
+/* line 226, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.btn {
+  margin-bottom: 1.1em;
+}
+/* line 228, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+.btn:hover {
+  cursor: pointer;
+}
+
+/* line 232, C:/rb/odinproj/odin-chat/app/assets/stylesheets/lobby.scss */
+small#bot-small {
+  color: #69d92e;
+}
