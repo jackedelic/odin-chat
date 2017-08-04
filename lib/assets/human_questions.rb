@@ -3,7 +3,7 @@
 		"who are you","who r you","who r u","tell me about yourself","who r u"
 	],
 	"hi":[
-		"hi","hello","^\s*yo(|!+|\s)"
+		"hi(\s)*|!*","hello","^\s*yo(|!+|\s)"
 	],
 	"ok":[
 		"ok","alright","orite","okay","okie"
