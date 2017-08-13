@@ -35,6 +35,8 @@ gem 'bcrypt', '~> 3.1.7', git: 'https://github.com/codahale/bcrypt-ruby.git'
 # gem 'capistrano-rails', group: :development
 gem 'redis'
 
+gem 'rest-client'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'sqlite3'

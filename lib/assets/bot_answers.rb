@@ -20,6 +20,9 @@
 	"i am lonely":[
 		"It's okay. We all do sometimes.","Awww. You can chat with me. I will try to be smarter every day"
 	],
+	"meaning of word":[
+		"dictionary"
+	],
 	"non-interpretable":
 	[
 		"What did you say?","Huh?","I beg your pardon.","I have no idea what you're talking about","Come again.","Err... Could you repeat what you just said?"

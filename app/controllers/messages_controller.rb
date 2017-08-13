@@ -1,3 +1,7 @@
+require 'net/http'
+require 'uri'
+require 'open-uri'
+require 'rest-client'
 class MessagesController < ApplicationController
 	def all_messages_in_particular_group
 		# tell the world the user is online
@@ -74,7 +78,7 @@ class MessagesController < ApplicationController
 			ActionCable.server.broadcast("room_channel_bot_human_#{current_user.id}",content: bot_reply)
 		end
 
-		render json: generate_bot_message(@message_content)
+		render json: bot_replies
 
 	end
 
@@ -96,12 +100,36 @@ class MessagesController < ApplicationController
 			# if bot doesn't understand the human question
 			answers << bot_answers["non-interpretable"][rand(0...bot_answers["non-interpretable"].length)]
 			return answers
+		elsif answers[0] == "dictionary"
+			answers = []
+			if user_message.split("what is").length == 2
+				word = user_message.split("what is")[1].match(/[a-z]+/)[0]
+			else
+				word = user_message.split("what does")[1].match(/[a-z]+/)[0]
+			end
+			# handle undefined
+			if request_word_meaning(word).empty?
+				answers << "is it a typo?"
+				return answers
+			else
+				request_word_meaning(word).each_with_index do |item,i|
+					answers << ((i+1).to_s + ". " + item)
+				end
+				return answers
+			end
 		else
 			return answers
 		end
 
 	end
 
-
+	def request_word_meaning(word)
+		resp = []
+		res = RestClient.get('https://owlbot.info/api/v1/dictionary/'+word+'?format=json')
+		JSON.parse(res).each do |item|
+			resp << item['defenition']
+		end
+		return resp
+	end
 
 end
