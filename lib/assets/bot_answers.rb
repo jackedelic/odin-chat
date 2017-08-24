@@ -20,8 +20,11 @@
 	"i am lonely":[
 		"It's okay. We all do sometimes.","Awww. You can chat with me. I will try to be smarter every day"
 	],
-	"meaning of word":[
-		"dictionary"
+	"what is":[
+		"what is"
+	],
+	"fuck you":[
+		"...","wtf...","fuck off!"
 	],
 	"non-interpretable":
 	[

@@ -17,11 +17,14 @@
 	"i am lonely":[
 		"i (am|feel) lonely"
 	],
-	"meaning of word":[
-		"what (does|is) [A-Za-z\-]{1,}(| mean)\??"
+	"what is":[
+		"what( the fuck|)( does| is(| a)|) [A-Za-z\-]{1,}(| mean(|s))\??","([^a-z]+|^)define ", "what the fuck (is|does)( a| an) [A-Za-z\-]{1,}(| mean(|s))\?"
 	],
 	"creator":[
 		"who create[d]? (you|u)","where (are|r) (you|u) from"
+	],
+	"fuck you":[
+		"([^a-z]+|^)f(uk|uck|ck|k) (you|u)"
 	]
 
 }

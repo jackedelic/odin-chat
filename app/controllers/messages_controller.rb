@@ -100,23 +100,10 @@ class MessagesController < ApplicationController
 			# if bot doesn't understand the human question
 			answers << bot_answers["non-interpretable"][rand(0...bot_answers["non-interpretable"].length)]
 			return answers
-		elsif answers[0] == "dictionary"
+		elsif answers[0] == "what is"
 			answers = []
-			if user_message.split("what is").length == 2
-				word = user_message.split("what is")[1].match(/[a-z]+/)[0]
-			else
-				word = user_message.split("what does")[1].match(/[a-z]+/)[0]
-			end
-			# handle undefined
-			if request_word_meaning(word).empty?
-				answers << "is it a typo?"
-				return answers
-			else
-				request_word_meaning(word).each_with_index do |item,i|
-					answers << ((i+1).to_s + ". " + item)
-				end
-				return answers
-			end
+			answers << analyse_user_message(user_message,answers)
+			return answers
 		else
 			return answers
 		end
@@ -132,4 +119,45 @@ class MessagesController < ApplicationController
 		return resp
 	end
 
+	def analyse_user_message(user_message,answers)
+		#after splitting => ["","...."]
+		word = ""
+		if user_message.split("what is a").length == 2
+			word = user_message.split("what is a")[1].match(/[a-z]+/)[0]
+		elsif user_message.split("what is").length == 2
+			# doing math
+			crucial_part =  user_message.split("what is")[1]
+			if crucial_part =~ /[0-9]/
+				return evaluate_math(crucial_part)
+			else
+				word = user_message.split("what is")[1].match(/[a-z]+/)[0]
+			end
+
+		elsif user_message.split("what does").length == 2
+			word = user_message.split("what does")[1].match(/[a-z]+/)[0]
+		elsif user_message.split("define").length == 2
+			word = user_message.split("define")[1].match(/[a-z]+/)[0]
+		else
+			word = user_message.split("what")[1].match(/[a-z]+/)[0]
+		end
+		# handle undefined
+		if request_word_meaning(word).empty?
+			answers << "is it a typo?"
+			return answers
+		else #use dictionary
+			request_word_meaning(word).each_with_index do |item,i|
+				answers << ((i+1).to_s + ". " + item)
+			end
+			return answers
+		end
+	end
+
+	def evaluate_math(expr)
+		expr = expr.match(/[^\?]+/)[0]
+		# turn "math" to "Math"
+		expr = expr.gsub('math','Math')
+		# function without Math prepended
+		expr = expr.gsub(/(asinh|acosh|atanh|asin|acos|atan|sin|cos|tan|log)/,'Math::\1')
+		return eval(expr)
+	end
 end
