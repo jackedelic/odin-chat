@@ -157,7 +157,8 @@ class MessagesController < ApplicationController
 		# turn "math" to "Math"
 		expr = expr.gsub('math','Math')
 		# function without Math prepended
-		expr = expr.gsub(/(asinh|acosh|atanh|asin|acos|atan|sin|cos|tan|log)/,'Math::\1')
+		expr = expr.gsub('pi','PI')
+		expr = expr.gsub(/(asinh|acosh|atanh|asin|acos|atan|sin|cos|tan|log|PI)/,'Math::\1')
 		return eval(expr)
 	end
 end
